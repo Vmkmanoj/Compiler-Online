@@ -1,4 +1,11 @@
-import {Button} from "antd"
+
+import {Flex} from "antd"; 
+
+import Codeediter from "./Components/Codeediter";
+
+import "../src/App.css"
+
+
 
 function App() {
 
@@ -6,7 +13,11 @@ function App() {
   return (
     <>
 
-    <Button >hello world</Button>
+   <Flex gap="middle">
+
+        <Codeediter></Codeediter>
+   
+   </Flex>
 
 
 
