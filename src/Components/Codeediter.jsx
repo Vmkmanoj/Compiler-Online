@@ -33,14 +33,14 @@ function CodeEditor() {
     color: "white",
     textAlign: "center",
     fontSize: "24px",
-    backgroundColor: "#333",
+    backgroundColor: "#1c2130",
     padding: "10px",
   };
 
   return (
     <>
       <Row>
-        <Col span={6} style={{ backgroundColor: "black", padding: "20px" }}>
+        <Col span={6} style={{ backgroundColor: "#1c2130", padding: "20px" }}>
           <Header style={HeaderStyle}>Code Editor</Header>
           <Select
             style={{ width: "100%", marginTop: "20px", backgroundColor: "gray" }}

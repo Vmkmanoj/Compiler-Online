@@ -5,7 +5,7 @@ import Codeediter from "./Components/Codeediter";
 
 import "../src/App.css"
 
-
+import Output from "./Components/output";
 
 function App() {
 
@@ -16,6 +16,7 @@ function App() {
    <Flex gap="middle" className="fullbox">
 
         <Codeediter></Codeediter>
+        <Output></Output>
    
    </Flex>
 
