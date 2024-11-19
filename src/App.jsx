@@ -14,7 +14,7 @@ function App() {
 
   const[code,setCode] = useState("")
 
-  console.log(code)
+  // console.log(code)
   // console.log(langage)
 
 

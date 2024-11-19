@@ -6,6 +6,10 @@ const Api = axios.create({
 });
 
 const excuteCode = async (code, langage) => {
+
+  console.log("from apipage:",code);
+
+  console.log("from api page:",langage)
     
   try {
     const response = await Api.post("/execute", {
