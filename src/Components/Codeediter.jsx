@@ -1,28 +1,33 @@
 import { Editor } from "@monaco-editor/react";
-import { Flex, Layout, Select,Button } from "antd";
+import { Layout, Select, Button, Row, Col } from "antd";
 import { useRef, useState } from "react";
-
+import { CODE_SNIPPETS } from "./language";
 
 const { Header } = Layout;
 
-function Codeediter() {
-  const [langage, setLangage] = useState("javascript");
+const codeSnip = Object.entries(CODE_SNIPPETS);
 
-  const editerRef = useRef(null)
+function CodeEditor() {
+  const [langage, setLangage] = useState("javascript");
+  const [editorValue, setEditorValue] = useState(CODE_SNIPPETS.python); // Initial value
+  const editorRef = useRef(null);
 
   const handleChange = (value) => {
     setLangage(value);
+    setEditorValue(CODE_SNIPPETS[value]); // Update editor content based on selected language
   };
 
-  const value = (value, event)=>{
+  const handleEditorChange = (value) => {
+    setEditorValue(value); // Update state with the current editor content
+  };
 
-        editerRef.current = value
+  const handleEditorMount = (editor) => {
+    editorRef.current = editor;
+  };
 
-  }
-
-  const CodeRun= ()=>{
-    alert(editerRef.current.getValue());
-  }
+  const CodeRun = () => {
+    alert(editorRef.current?.getValue());
+  };
 
   const HeaderStyle = {
     color: "white",
@@ -34,32 +39,34 @@ function Codeediter() {
 
   return (
     <>
-
-    <Flex horizontal="true" style={{}}>
-      <Layout style={{ backgroundColor: "gray",  margin:20}}>
-        <Header style={HeaderStyle}>Code Editor</Header>
-        <Select
-          style={{ width: 200, margin: "20px" ,backgroundColor:"gray"}}
-          onChange={handleChange}
-          defaultValue="javascript"
-          options={[
-            { value: "javascript", label: "JAVASCRIPT" },
-            { value: "java", label: "JAVA" },
-            { value: "python", label: "PYTHON" },
-            { value: "php", label: "PHP" },
-          ]}
-        />
-      </Layout>
-
-      <Layout style={{padding:10}}>
-        <Editor height="100vh" width="100vh" onChange={value}  language={langage} theme="vs-dark" defaultValue="// some comment"/>
-      </Layout>
-
-      <Button onClick={CodeRun}>Run code</Button>
-
-      </Flex>
+      <Row>
+        <Col span={6} style={{ backgroundColor: "black", padding: "20px" }}>
+          <Header style={HeaderStyle}>Code Editor</Header>
+          <Select
+            style={{ width: "100%", marginTop: "20px", backgroundColor: "gray" }}
+            onChange={handleChange}
+            defaultValue="javascript"
+            options={codeSnip.map(([key]) => ({ value: key, label: key }))}
+          />
+          <Button style={{ marginTop: "20px" }} onClick={CodeRun}>
+            Run Code
+          </Button>
+        </Col>
+        <Col span={18}>
+          <Editor
+            height="100vh"
+            width="100%"
+            language={langage}
+            theme="vs-dark"
+            defaultLanguage={`//This is ${langage}`}
+            value={editorValue} // Bind the editor content
+            onChange={handleEditorChange}
+            onMount={handleEditorMount}
+          />
+        </Col>
+      </Row>
     </>
   );
 }
 
-export default Codeediter;
+export default CodeEditor;

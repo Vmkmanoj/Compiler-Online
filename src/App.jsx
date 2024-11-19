@@ -13,7 +13,7 @@ function App() {
   return (
     <>
 
-   <Flex gap="middle">
+   <Flex gap="middle" className="fullbox">
 
         <Codeediter></Codeediter>
    
