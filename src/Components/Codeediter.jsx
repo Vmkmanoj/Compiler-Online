@@ -2,15 +2,23 @@ import { Editor } from "@monaco-editor/react";
 import { Layout, Select, Button, Row, Col } from "antd";
 import { useRef, useState } from "react";
 import { CODE_SNIPPETS } from "./language";
-
+import "../Components/Codeediter.css" 
+import Output from "./output";
 const { Header } = Layout;
 
 const codeSnip = Object.entries(CODE_SNIPPETS);
 
-function CodeEditor() {
-  const [langage, setLangage] = useState("javascript");
+function CodeEditor({langage,setLangage,code,setCode}) {
+
+  // console.log(code)
+  // const [langage, setLangage] = useState("javascript");
+
+  // const [code,SetCode] = useState("");  
+
   const [editorValue, setEditorValue] = useState(CODE_SNIPPETS.python); // Initial value
   const editorRef = useRef(null);
+
+  // console.log(editorValue)
 
   const handleChange = (value) => {
     setLangage(value);
@@ -27,7 +35,13 @@ function CodeEditor() {
 
   const CodeRun = () => {
     alert(editorRef.current?.getValue());
+
+   
+    setCode(editorValue)
+   
   };
+
+  // console.log(code);
 
   const HeaderStyle = {
     color: "white",
@@ -43,14 +57,14 @@ function CodeEditor() {
         <Col span={6} style={{ backgroundColor: "#1c2130", padding: "20px" }}>
           <Header style={HeaderStyle}>Code Editor</Header>
           <Select
-            style={{ width: "100%", marginTop: "20px", backgroundColor: "gray" }}
+            style={{ width: "100%", marginTop: "20px", backgroundColor: "gray",height:"50px" }}
             onChange={handleChange}
             defaultValue="javascript"
             options={codeSnip.map(([key]) => ({ value: key, label: key }))}
           />
-          <Button style={{ marginTop: "20px" }} onClick={CodeRun}>
+          <button style={{ marginTop: "20px" }} className="buttonRun" onClick={CodeRun}>
             Run Code
-          </Button>
+          </button>
         </Col>
         <Col span={18}>
           <Editor
@@ -64,7 +78,9 @@ function CodeEditor() {
             onMount={handleEditorMount}
           />
         </Col>
+    
       </Row>
+      <Output className="outputbox"  code={code} langage={langage}></Output> 
     </>
   );
 }
