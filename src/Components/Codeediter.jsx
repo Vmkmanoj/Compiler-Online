@@ -10,20 +10,20 @@ const { Header } = Layout;
 const codeSnip = Object.entries(CODE_SNIPPETS);
 
 function CodeEditor({ langage, setLangage, code, setCode }) {
-  const [editorValue, setEditorValue] = useState(CODE_SNIPPETS.python); // Initial value
+  const [editorValue, setEditorValue] = useState(CODE_SNIPPETS.python); 
   const editorRef = useRef(null);
 
   const [loading,setLoading] =  useState(false)
 
-  // Handle language change
+  
   const handleChange = (value) => {
     setLangage(value);
-    setEditorValue(CODE_SNIPPETS[value]); // Update editor content based on selected language
+    setEditorValue(CODE_SNIPPETS[value]); 
   };
 
   // Handle editor content change
   const handleEditorChange = (value) => {
-    setEditorValue(value); // Update state with the current editor content
+    setEditorValue(value); 
   };
 
   // Mount the editor
@@ -33,7 +33,7 @@ function CodeEditor({ langage, setLangage, code, setCode }) {
 
   // Run the code
   const CodeRun = () => {
-    setCode(editorValue); // Pass the current code to the parent
+    setCode(editorValue); 
     // console.log("Code passed to Output:", editorValue);
     setLoading(true)
     setTimeout(()=>{
